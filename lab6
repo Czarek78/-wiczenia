@@ -1,0 +1,18 @@
+#1
+
+select avg(udzwig) from kreatura;
+select rodzaj, avg(waga), count(*) from kreatura k group by k.rodzaj;
+select avg(year(dataUr)) from kreatura k group by k.rodzaj;
+#3
+select*from kreatura as k,ekwipunek e where k.idKreatury=e.idKreatury;
+select*from kreatura k inner join ekwipunek e on k.idKreatury=e.idKreatury inner join zasob z on e.idZasobu=z.idZasobu;
+select*from  kreatura k left join ekwipunek e on k.idKreatury=e.idKreatury where e.idKreatury is null;
+#alternatywnie za pomocą podzapytania
+select *from kreatura where idKreatury not in (select distinct idKreatury from ekwipunek where idKreatury is not null);
+#4
+select*from kreatura k  join ekwipunek e on k.idKreatury=e.idKreatury join zasob z on e.idzasobu= z.idzasobu  where k.rodzaj='wiking' and year(dataur) between 1670 and 1679;
+select*from kreatura k  join ekwipunek e on k.idKreatury=e.idKreatury join zasob z on e.idzasobu= z.idzasobu  where z.rodzaj='jedzenie'  order by year(k.dataur) desc limit 5;
+select concat(k.nazwa,'-',r.nazwa) from kreatura k
+join   kreatura r on  k.idKreatury=r.idKreatury +5;
+#5
+select avg(e.waga) from zasob z 
